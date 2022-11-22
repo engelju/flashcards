@@ -13,14 +13,13 @@ import ch.fhnw.webfr.flashcards.domain.Questionnaire;
 import ch.fhnw.webfr.flashcards.persistence.QuestionnaireRepository;
 
 @Controller
-@RequestMapping("/hello")
 public class HelloWorldController {
 
     @Autowired
     private QuestionnaireRepository repository;
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(@RequestParam("name") String name) {
         List<Questionnaire> questionnaire = repository.findAll();
 

@@ -3,6 +3,7 @@ package ch.fhnw.webfr.flashcards.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,16 +42,16 @@ public class QuestionnaireController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     // @RequestMapping(value = "/{id}",  method = RequestMethod.GET)
-    public void findById(@PathVariable Long id, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        Questionnaire questionnaire = questionnaireRepository.findById(id);
+    public void findById(@PathVariable String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Optional<Questionnaire> questionnaire = questionnaireRepository.findById(id);
 		
         PrintWriter writer = response.getWriter();
         writer.append("<html lang='en'><head><title>Example</title></head><body>");
         writer.append("<h2>Questionnaire</h2>");
         
-        if (questionnaire != null) {
-            writer.append("<h3>" + questionnaire.getTitle() + "</h3>");
-            writer.append("<p>" + questionnaire.getDescription() + "</p>");	
+        if (questionnaire.isPresent()) {
+            writer.append("<h3>" + questionnaire.get().getTitle() + "</h3>");
+            writer.append("<p>" + questionnaire.get().getDescription() + "</p>");	
         } else {
             writer.append("<p><em>no questionnaire found</em></p>");
         }

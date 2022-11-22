@@ -1,14 +1,20 @@
 # Flashcard App
 
-Wichtige Files:
-    - src/main/java/ch/fhnw/webfr/flashcards/FlashcardsApplication.java
-    - src/main/resources/application.properties
+App being developed along with [FHNW-WEBFR-HS22](https://github.com/orgs/FHNW-WEBFR-HS22/repositories?q=&type=all&sort=name).
 
-Start mongodb with:  mongod --dbpath "$(pwd)/data/db"
+## Getting started
 
-Start the app with: gradle bootrun
+Start mongodb with: `mongod --dbpath "$(pwd)/data/db"`
+
+Start the app with: `gradle bootrun`
 
 Then connect via: http://localhost:8080/flashcard-mvc/questionnaires
+
+## Helpful hints
+
+Wichtige Files:
+- `src/main/java/ch/fhnw/webfr/flashcards/FlashcardsApplication.java`
+- `src/main/resources/application.properties`
 
 Mongosh:
 
@@ -48,6 +54,8 @@ webfr> db.questionnaires.find( { _id: ObjectId('5f65fb0ecde6fe22ab47e2e6') } )
 webfr> db.questionnaires.find( { title: 'Test 1'} )
 ```
 
-Healthcheck-Link: <http://localhost:8080/flashcard-mvc/actuator/health>.
+---
 
-Tomcat is provided thanks to implementation 'org.springframework.boot:spring-boot-starter-web' in build.gradle.
+- Healthcheck-Link: <http://localhost:8080/flashcard-mvc/actuator/health>.
+
+- Tomcat is provided thanks to implementation 'org.springframework.boot:spring-boot-starter-web' in build.gradle.

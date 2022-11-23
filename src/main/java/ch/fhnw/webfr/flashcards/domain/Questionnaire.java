@@ -1,12 +1,21 @@
 package ch.fhnw.webfr.flashcards.domain;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "questionnaires")
 public class Questionnaire {
-	@Id private String id;
+
+	@Id
+	private String id;
+	
+	@NotBlank @Size(min = 2, max = 30)
 	private String title;
+
+	@Size(min = 10, max = 50)
 	private String description;
 	
 	public Questionnaire() {	

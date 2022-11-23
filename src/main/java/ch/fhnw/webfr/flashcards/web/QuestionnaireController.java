@@ -2,9 +2,12 @@ package ch.fhnw.webfr.flashcards.web;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +44,11 @@ public class QuestionnaireController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-	public String create(Questionnaire questionnaire) {
+	public String create(@Valid Questionnaire questionnaire, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("questionnaire", questionnaire);
+            return "questionnaires/create";
+        }
 		questionnaireRepository.save(questionnaire);
 		return "redirect:questionnaires";
 	}

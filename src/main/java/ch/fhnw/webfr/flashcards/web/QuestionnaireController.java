@@ -20,25 +20,26 @@ import ch.fhnw.webfr.flashcards.persistence.QuestionnaireRepository;
 public class QuestionnaireController {
 
     @Autowired
-    private QuestionnaireRepository questionnaireRepository;
+    private QuestionnaireRepository repository;
     
     @RequestMapping(method = RequestMethod.GET)
-    public String findAll(Model model) {
-		model.addAttribute("questionnaires", questionnaireRepository.findAll());
+    public String list(Model model) {
+		model.addAttribute("questionnaires", repository.findAll());
         return "questionnaires/list";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public String findById(@PathVariable String id, Model model) {
-        Optional<Questionnaire> questionnaire = questionnaireRepository.findById(id);
+    public String show(@PathVariable String id, Model model) {
+        Optional<Questionnaire> questionnaire = repository.findById(id);
         if (questionnaire.isPresent()) {
             model.addAttribute("questionnaire", questionnaire.get());
-        }
         return "questionnaires/show";
+        }
+		return "redirect:/questionnaires";
     }
 
     @RequestMapping(method = RequestMethod.GET, params = { "form" })
-    public String getForm(Model model) {
+    public String getCreateForm(Model model) {
         model.addAttribute("questionnaire", new Questionnaire());
         return "questionnaires/create";
     }
@@ -49,7 +50,7 @@ public class QuestionnaireController {
             model.addAttribute("questionnaire", questionnaire);
             return "questionnaires/create";
         }
-		questionnaireRepository.save(questionnaire);
+		repository.save(questionnaire);
 		return "redirect:questionnaires";
 	}
 }

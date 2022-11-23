@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: maincontent(~{::section})}">
-<section>
-    <form method="post" th:action="@{/questionnaires}" th:object="${questionnaire}">
-        <div class="form-group row">
-            <label class="col-md-2" for="title">Title:</label>
-            <div class="col-md-10">
-                <input class="form-control" type="text" th:field="*{title}" autofocus="autofocus" />
+
+<head>
+<title>flashcard</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+
+<body>
+	<section>
+        <form method="post" th:action="@{/questionnaires}" th:object="${questionnaire}">
+            <div class="form-group row">
+                <label class="col-md-2" for="title">Title:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" th:field="*{title}" autofocus="autofocus" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-md-2" for="description">Description:</label>
-            <div class="col-md-10">
-                <input class="form-control" type="text" th:field="*{description}" />
+            <div class="form-group row">
+                <label class="col-md-2" for="description">Description:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" th:field="*{description}" />
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <a class="btn btn-default" th:href="@{/questionnaires}">Cancel</a>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </form>
-</section>
+            <div class="form-group row">
+                <a class="btn btn-default" th:href="@{/questionnaires}">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+	</section>
+</body>
+
 </html>

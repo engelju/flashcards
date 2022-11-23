@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: maincontent(~{::section})}">
+
+<head>
+    <title>flashcard show</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+
+<body>
     <section style="width: 60%; margin-left: 10em">
         <form th:object="${questionnaire}">
             <fieldset disabled>
@@ -21,4 +29,6 @@
             </div>
         </form>
     </section>
+</body>
+
 </html>

@@ -28,7 +28,7 @@ public class QuestionnaireController {
         return "questionnaires/list";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable String id, Model model) {
         Optional<Questionnaire> questionnaire = repository.findById(id);
         if (questionnaire.isPresent()) {
@@ -54,7 +54,7 @@ public class QuestionnaireController {
 		return "redirect:/questionnaires";
 	}
 
-    @RequestMapping(method = RequestMethod.DELETE, value="/{id}")
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable String id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);

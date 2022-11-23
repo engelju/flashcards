@@ -33,7 +33,7 @@ public class QuestionnaireController {
         Optional<Questionnaire> questionnaire = repository.findById(id);
         if (questionnaire.isPresent()) {
             model.addAttribute("questionnaire", questionnaire.get());
-        return "questionnaires/show";
+            return "questionnaires/show";
         }
 		return "redirect:/questionnaires";
     }
@@ -51,6 +51,14 @@ public class QuestionnaireController {
             return "questionnaires/create";
         }
 		repository.save(questionnaire);
-		return "redirect:questionnaires";
+		return "redirect:/questionnaires";
 	}
+
+    @RequestMapping(method = RequestMethod.DELETE, value="/{id}")
+    public String delete(@PathVariable String id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        }
+        return "redirect:/questionnaires";
+    }
 }

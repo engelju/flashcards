@@ -9,6 +9,15 @@ public class Questionnaire {
 	private String title;
 	private String description;
 	
+	public Questionnaire() {	
+        this("", "");	
+	}
+	
+	public Questionnaire(String title, String description) {
+		this.title = title;
+		this.description = description;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}

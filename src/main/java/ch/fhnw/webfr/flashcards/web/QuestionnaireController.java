@@ -54,6 +54,33 @@ public class QuestionnaireController {
 		return "redirect:/questionnaires";
 	}
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, params = { "updateForm" })
+    public String getUpdateForm(@PathVariable String id, Model model) {
+        if (repository.existsById(id)) {
+            model.addAttribute("questionnaire", repository.findById(id).get());
+            return "questionnaires/update";
+        }
+        return "errors/404";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(@PathVariable String id, @Valid Questionnaire questionnaire, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("questionnaire", questionnaire);
+            return "questionnaires/update";
+        }
+
+		if (repository.existsById(id)) {
+			Optional<Questionnaire> q = repository.findById(id);
+			q.get().setTitle(questionnaire.getTitle());
+			q.get().setDescription(questionnaire.getDescription());
+			repository.save(q.get());
+			return "redirect:/questionnaires";
+		}
+		
+		return "errors/404";
+	}
+
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable String id) {
         if (repository.existsById(id)) {

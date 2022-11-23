@@ -35,7 +35,7 @@ public class QuestionnaireController {
             model.addAttribute("questionnaire", questionnaire.get());
             return "questionnaires/show";
         }
-		return "redirect:/questionnaires";
+		return "errors/404";
     }
 
     @RequestMapping(method = RequestMethod.GET, params = { "form" })
@@ -58,7 +58,8 @@ public class QuestionnaireController {
     public String delete(@PathVariable String id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
+            return "redirect:/questionnaires";
         }
-        return "redirect:/questionnaires";
+        return "errors/404";
     }
 }
